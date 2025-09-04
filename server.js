@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const { Server } = require("socket.io");
-const Message = require("./models/Message"); 
+const Message = require("./models/Message");
 
 dotenv.config();
 const app = express();
@@ -19,6 +19,12 @@ app.use(cors());
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+
+
+// Health check
+app.get("/", (req, res) => {
+  res.send("✅ Backend is alive");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
